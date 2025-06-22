@@ -50,15 +50,9 @@ void loop(){
 
     http.begin(wifiClient, horario);
     httpCode = http.GET();
-    if (httpCode = 200){
+    if (httpCode == 200){
       String payload = http.getString();
       Serial.println("Horário Recebido: " + payload);
-
-      if (payload.indexOf("horario") != -1 && p_antes != payload){
-        Serial.println(payload);
-      }
-
-      p_antes = payload;
     }
   }
 
