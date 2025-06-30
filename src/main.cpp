@@ -5,6 +5,14 @@
 const char* ssid = "Ameba";
 const char* password = "xyz@1234";
 
+const char* facul = "Funcesi";
+const char* senha_facul = "Funcesi2023";
+
+const char* teste = "POCO X6 Pro 5G";
+const char* senha_teste = "iopasdf123";
+
+int tentativa = 0;
+
 const char* serverUrl = "https://render-server-2itn.onrender.com/commands";
 const char* horario = "https://render-server-2itn.onrender.com/arduino";
 
@@ -14,9 +22,30 @@ void setup(){
   Serial.begin(9600);
   WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED){
+  while (WiFi.status() != WL_CONNECTED && tentativa < 20){
     delay(1000);
-    Serial.println("Conectando");
+    Serial.println("Conectando à rede AMEBA");
+    tentativa += 1;
+  }
+
+  tentativa = 0;
+
+  while (WiFi.status() != WL_CONNECTED && tentativa < 20)
+  {
+    WiFi.begin(facul, senha_facul);
+    delay(1000);
+    Serial.println("Conectando à rede FUNCESI. Tentativa: ");
+    tentativa += 1;
+  }
+
+  tentativa = 0;
+
+  while (WiFi.status() != WL_CONNECTED && tentativa < 20)
+  {
+    WiFi.begin(teste, senha_teste);
+    delay(1000);
+    Serial.println("Conectando à rede POCO. Tentativa: ");
+    tentativa += 1;
   }
 
   if (WiFi.status() == WL_CONNECTED)
